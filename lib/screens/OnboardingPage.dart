@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:satish_s_application1/core/utils/color_constant.dart';
 import 'package:satish_s_application1/screens/onboard1.dart';
 import 'package:satish_s_application1/screens/onboard2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -36,7 +37,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               topline:
                   "Experience the convenience of face recognition technology",
               toplineColor: Colors.grey[300],
-              toplineAlignment: TextAlign.left,
+              toplineAlignment: CrossAxisAlignment.start,
+              toplineTextAlignment: TextAlign.start,
             ),
             Onboard1(
               topImagePath: "assets/images/onboard2top.svg",
@@ -45,8 +47,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               desc:
                   "Attendance can be marked on the basis of a desired location.",
               topline: "Go beyond borders with geo-tagging and geo-fencing",
-              toplineColor: Colors.grey[300],
-              toplineAlignment: TextAlign.left,
+              toplineColor: ColorConstant.indigo800,
+              toplineAlignment: CrossAxisAlignment.start,
+              toplineTextAlignment: TextAlign.start,
             ),
             Onboard1(
               topImagePath: "assets/images/onboard3top.svg",
@@ -56,7 +59,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   "We keep track of your Attendance. Check your Analytics here.",
               topline: "Maximize your impact with attendance analytics.",
               toplineColor: Colors.grey[300],
-              toplineAlignment: TextAlign.left,
+              toplineAlignment: CrossAxisAlignment.end,
+              toplineTextAlignment: TextAlign.end,
+              right: 15,
+              left: null,
             ),
             Onboard2(
               topImagePath: "assets/images/onboard4top.svg",
@@ -66,7 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               terms:
                   "By clicking it️, You are agreeing to terms and conditions for this app",
               toplineColor: Colors.grey[300],
-              toplineAlignment: TextAlign.left,
+              toplineAlignment: CrossAxisAlignment.start,
             )
           ],
         ),
@@ -81,7 +87,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onPressed: () {
                   _pageController.jumpToPage(2);
                 },
-                child: const Text("SKIP")),
+                child: const Text(
+                  "Skip",
+                  style: TextStyle(color: Colors.white24),
+                )),
             Center(
               child: SmoothPageIndicator(
                 controller: _pageController,
