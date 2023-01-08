@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:satish_s_application1/widgets/custom_button.dart';
+import 'package:satish_s_application1/screens/login_screen.dart';
 
 class Onboard2 extends StatelessWidget {
   final String topImagePath;
@@ -49,33 +49,46 @@ class Onboard2 extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       // Text widget, positioned at top-center
-                      Positioned(
-                          top: 150,
-                          left: left,
-                          right: right,
-                          width: 250,
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: toplineAlignment,
-                              children: [
-                                Text(topline,
-                                    textAlign: toplineTextAlignment,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      color: toplineColor,
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w400,
-                                    )),
-                                SizedBox(height: 10.0),
-                                Container(
-                                  height: 1,
-                                  width: 250,
-                                  color: toplineColor,
-                                ),
-                              ],
+                      TweenAnimationBuilder(
+                        tween: Tween<double>(begin: 0, end: 1),
+                        duration: Duration(milliseconds: 100),
+                        child: Column(
+                          crossAxisAlignment: toplineAlignment,
+                          children: [
+                            Text(
+                              topline,
+                              textAlign: toplineTextAlignment,
+                              maxLines: 2,
+                              style: TextStyle(color: toplineColor),
                             ),
-                          )),
+                            SizedBox(height: 10.0),
+                            Container(
+                              height: 1,
+                              width: 250,
+                              color: toplineColor,
+                            ),
+                          ],
+                        ),
+                        builder:
+                            (BuildContext context, double _val, Widget? child) {
+                          return Positioned(
+                            top: 150,
+                            left: left == null ? left : -(1 - _val) * 30,
+                            right: right == null ? right : right! + (_val * 10),
+                            width: 250,
+                            child: Container(
+                              child: Opacity(
+                                opacity: _val,
+                                child: Container(
+                                  margin: EdgeInsets.only(left: _val * 20),
+                                  // padding: EdgeInsets.only(top: _val * 20),
+                                  child: child,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -105,15 +118,30 @@ class Onboard2 extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 10.0),
-                        child: CustomButton(
-                          height: 52,
-                          width: 327,
-                          text: "Get Started",
-                          variant: ButtonVariant.FillIndigo80002,
-                          shape: ButtonShape.CircleBorder26,
-                          padding: ButtonPadding.PaddingAll15,
-                          fontStyle: ButtonFontStyle.MulishRomanBold16,
-                        ),
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 120.0),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                backgroundColor: Color(0xFF2E3192)),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Scaffold(body: LoginScreen())));
+                            },
+                            child: Text(
+                              "Get Started",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        height: 2.0,
                       ),
                       Container(
                         child: Text(

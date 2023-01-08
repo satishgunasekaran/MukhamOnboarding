@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:satish_s_application1/core/utils/color_constant.dart';
-import 'package:satish_s_application1/screens/onboard1.dart';
-import 'package:satish_s_application1/screens/onboard2.dart';
-import 'package:satish_s_application1/widgets/custom_button.dart';
+
+import 'package:satish_s_application1/screens/onboard_screen1.dart';
+import 'package:satish_s_application1/screens/getstarted_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -26,7 +25,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(bottom: 80),
+        
         child: PageView(
+          
           controller: _pageController,
           children: [
             Onboard1(
@@ -48,7 +49,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               desc:
                   "Attendance can be marked on the basis of a desired location.",
               topline: "Go beyond borders with geo-tagging and geo-fencing",
-              toplineColor: ColorConstant.indigo800,
+              toplineColor: Colors.indigo,
               toplineAlignment: CrossAxisAlignment.start,
               toplineTextAlignment: TextAlign.start,
             ),
@@ -105,7 +106,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     curve: Curves.easeIn)),
               ),
             ),
-            TextButton(
+            Container(
+              height: 50,
+              width: 100,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    backgroundColor: Color(0xFF2E3192)),
+
+                // style: TextStyle(),
                 onPressed: () {
                   print(_pageController.page);
                   if (_pageController.page == 2.0) {
@@ -131,10 +143,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         curve: Curves.easeInOut);
                   }
                 },
-                child: CustomButton(
-                  width: 84,
-                  text: "Next",
-                )),
+                child: Text(
+                  "Next",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
           ],
         ),
       ),

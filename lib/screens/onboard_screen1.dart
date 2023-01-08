@@ -50,7 +50,7 @@ class Onboard1 extends StatelessWidget {
                       // Text widget, positioned at top-center
                       TweenAnimationBuilder(
                         tween: Tween<double>(begin: 0, end: 1),
-                        duration: Duration(milliseconds: 500),
+                        duration: Duration(milliseconds: 750),
                         child: Column(
                           crossAxisAlignment: toplineAlignment,
                           children: [
@@ -58,6 +58,7 @@ class Onboard1 extends StatelessWidget {
                               topline,
                               textAlign: toplineTextAlignment,
                               maxLines: 2,
+                              style: TextStyle(color: toplineColor),
                             ),
                             SizedBox(height: 10.0),
                             Container(
@@ -72,9 +73,7 @@ class Onboard1 extends StatelessWidget {
                           return Positioned(
                             top: 150,
                             left: left == null ? left : -(1 - _val) * 30,
-                            right: right == null
-                                ? right
-                                : right! + ((1 - _val) * 40),
+                            right: right == null ? right : right! + (_val * 10),
                             width: 250,
                             child: Container(
                               child: Opacity(
