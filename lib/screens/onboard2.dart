@@ -10,16 +10,23 @@ class Onboard2 extends StatelessWidget {
   final toplineColor;
   final CrossAxisAlignment toplineAlignment;
   final String terms;
+  final double? left;
+  final double? right;
 
-  const Onboard2(
-      {Key? key,
-      required this.topImagePath,
-      required this.midImagePath,
-      required this.terms,
-      required this.topline,
-      required this.toplineColor,
-      required this.toplineAlignment})
-      : super(key: key);
+  final TextAlign toplineTextAlignment;
+
+  const Onboard2({
+    Key? key,
+    required this.topImagePath,
+    required this.midImagePath,
+    required this.terms,
+    required this.topline,
+    required this.toplineColor,
+    required this.toplineAlignment,
+    required this.toplineTextAlignment,
+    this.left = 15.0,
+    this.right = null,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +51,15 @@ class Onboard2 extends StatelessWidget {
                       // Text widget, positioned at top-center
                       Positioned(
                           top: 150,
-                          left: 15,
-                          right: 50,
+                          left: left,
+                          right: right,
+                          width: 250,
                           child: Container(
                             child: Column(
                               crossAxisAlignment: toplineAlignment,
                               children: [
                                 Text(topline,
+                                    textAlign: toplineTextAlignment,
                                     maxLines: 2,
                                     style: TextStyle(
                                       color: toplineColor,
@@ -75,12 +84,11 @@ class Onboard2 extends StatelessWidget {
               Flexible(
                 flex: 2,
                 child: Container(
-                  height: constraints.maxHeight * 0.4,
+                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                  height: constraints.maxHeight * 0.32,
                   width: double.infinity,
                   child: Image.asset(
                     midImagePath,
-                    // width: 100,
-                    height: 250,
                   ),
                 ),
               ),
@@ -88,39 +96,37 @@ class Onboard2 extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   height: constraints.maxHeight * 0.4,
+                  margin: EdgeInsets.only(top: 50),
                   padding:
                       EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 10.0),
-                        child: Column(
-                          children: [
-                            CustomButton(
-                              height: 52,
-                              width: 327,
-                              text: "Get Started",
-                              variant: ButtonVariant.FillIndigo80002,
-                              shape: ButtonShape.CircleBorder26,
-                              padding: ButtonPadding.PaddingAll15,
-                              fontStyle: ButtonFontStyle.MulishRomanBold16,
-                            ),
-                            Container(
-                              child: Text(
-                                "By clicking it️, You are agreeing to terms and conditions for this app",
-                                maxLines: null,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.42,
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: CustomButton(
+                          height: 52,
+                          width: 327,
+                          text: "Get Started",
+                          variant: ButtonVariant.FillIndigo80002,
+                          shape: ButtonShape.CircleBorder26,
+                          padding: ButtonPadding.PaddingAll15,
+                          fontStyle: ButtonFontStyle.MulishRomanBold16,
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          "By clicking it️, You are agreeing to terms and conditions for this app",
+                          maxLines: null,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Mulish',
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.42,
+                          ),
                         ),
                       ),
                     ],

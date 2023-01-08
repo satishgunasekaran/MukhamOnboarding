@@ -48,33 +48,47 @@ class Onboard1 extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       // Text widget, positioned at top-center
-                      Positioned(
-                          top: 150,
-                          left: left,
-                          right: right,
-                          width: 250,
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: toplineAlignment,
-                              children: [
-                                Text(topline,
-                                    textAlign: toplineTextAlignment,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      color: toplineColor,
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w400,
-                                    )),
-                                SizedBox(height: 10.0),
-                                Container(
-                                  height: 1,
-                                  width: 250,
-                                  color: toplineColor,
-                                ),
-                              ],
+                      TweenAnimationBuilder(
+                        tween: Tween<double>(begin: 0, end: 1),
+                        duration: Duration(milliseconds: 500),
+                        child: Column(
+                          crossAxisAlignment: toplineAlignment,
+                          children: [
+                            Text(
+                              topline,
+                              textAlign: toplineTextAlignment,
+                              maxLines: 2,
                             ),
-                          )),
+                            SizedBox(height: 10.0),
+                            Container(
+                              height: 1,
+                              width: 250,
+                              color: toplineColor,
+                            ),
+                          ],
+                        ),
+                        builder:
+                            (BuildContext context, double _val, Widget? child) {
+                          return Positioned(
+                            top: 150,
+                            left: left == null ? left : -(1 - _val) * 30,
+                            right: right == null
+                                ? right
+                                : right! + ((1 - _val) * 40),
+                            width: 250,
+                            child: Container(
+                              child: Opacity(
+                                opacity: _val,
+                                child: Container(
+                                  margin: EdgeInsets.only(left: _val * 20),
+                                  // padding: EdgeInsets.only(top: _val * 20),
+                                  child: child,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -83,12 +97,11 @@ class Onboard1 extends StatelessWidget {
               Flexible(
                 flex: 2,
                 child: Container(
-                  height: constraints.maxHeight * 0.4,
+                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                  height: constraints.maxHeight * 0.32,
                   width: double.infinity,
                   child: Image.asset(
                     midImagePath,
-                    // width: 100,
-                    height: 250,
                   ),
                 ),
               ),
